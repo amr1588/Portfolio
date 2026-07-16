@@ -21,7 +21,11 @@
 
                 <h3>Amr Ahmed</h3>
 
-                <ul>
+                <button class="MenuBtn" id="menuToggle" aria-label="Toggle Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+
+                <ul id="navLinks">
 
                     <a href="#FirstSection">
                         <li>Home</li>
@@ -79,24 +83,21 @@
 
                 </div>
 
-                <div class="LeftContent">
+                <div class="DetailsGrid">
 
-                    <p><b>Name:</b> Amr Ahmed</p>
-                    <p><b>Freelance:</b> Available</p>
-                    <p><b>Phone:</b> +201069111355</p>
+                    <div class="DetailItem">
+                        <p><b>Name:</b> Amr Ahmed</p>
+                        <p><b>Freelance:</b> Available</p>
+                        <p><b>Phone:</b> +201069111355</p>
+                    </div>
+
+                    <div class="DetailItem">
+                        <p><b>Job Title:</b> FrontEnd Developer</p>
+                        <p><b>Location:</b> Egypt</p>
+                        <p><b>E-mail:</b> amr.ahmed20001451@gmail.com</p>
+                    </div>
 
                 </div>
-
-
-                <div class="RightContent">
-
-                    <p><b>Job Title:</b> FrontEnd Developer</p>
-                    <p><b>Location:</b> Egypt</p>
-                    <p><b>E-mail:</b> amr.ahmed20001451@gmail.com</p>
-
-                </div>
-
-                <div class="clr"></div>
 
                 <div class="AboutActions">
                     <a href="https://mail.google.com/mail/?view=cm&fs=1&to=amr.ahmed20001451@gmail.com" target="_blank" class="HireMeBtn">
@@ -165,10 +166,6 @@
                         <p>Experienced in consuming RESTful APIs and real-time data synchronization.</p>
                     </div>
                 </div>
-                <div class="clr"></div>
-
-
-
             </div>
 
         </div>
@@ -256,7 +253,43 @@
     </section>
 
 
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        if (menuToggle && navLinks) {
+            menuToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                navLinks.classList.toggle('active');
+                const icon = menuToggle.querySelector('i');
+                if (navLinks.classList.contains('active')) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-xmark');
+                } else {
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
 
+            document.addEventListener('click', (e) => {
+                if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                    navLinks.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                }
+            });
+
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    const icon = menuToggle.querySelector('i');
+                    icon.classList.remove('fa-xmark');
+                    icon.classList.add('fa-bars');
+                });
+            });
+        }
+    </script>
 </body>
 
 </html>
